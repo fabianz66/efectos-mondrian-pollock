@@ -1,0 +1,12 @@
+INPUT(
+./debug\VentanaPrincipal.o
+./debug\Observable.o
+./debug\ManejoPrograma.o
+./debug\ManejoEfecto.o
+./debug\ManejoCamara.o
+./debug\Controller.o
+./debug\VentanaAjustes.o
+./debug\moc_VentanaPrincipal.o
+./debug\moc_VentanaAjustes.o
+./debug\qrc_images.o
+);

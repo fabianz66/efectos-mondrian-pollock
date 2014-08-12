@@ -1,0 +1,14 @@
+INPUT(
+./debug\VentanaInicio.o
+./debug\Observable.o
+./debug\Controller.o
+./debug\VentanaAjustes.o
+./debug\VentanaImagen.o
+./debug\ManejoCamara.o
+./debug\VentanaPrincipal.o
+./debug\moc_VentanaInicio.o
+./debug\moc_VentanaAjustes.o
+./debug\moc_VentanaImagen.o
+./debug\moc_VentanaPrincipal.o
+./debug\qrc_Imagenes.o
+);

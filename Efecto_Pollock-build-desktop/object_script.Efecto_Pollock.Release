@@ -1,0 +1,12 @@
+INPUT(
+./release\VentanaPrincipal.o
+./release\Observable.o
+./release\ManejoPrograma.o
+./release\ManejoEfecto.o
+./release\ManejoCamara.o
+./release\Controller.o
+./release\VentanaAjustes.o
+./release\moc_VentanaPrincipal.o
+./release\moc_VentanaAjustes.o
+./release\qrc_images.o
+);

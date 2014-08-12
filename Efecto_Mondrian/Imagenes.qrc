@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Imagenes/icono.jpg</file>
+        <file>Imagenes/fondo_ajustes.jpg</file>
+        <file>Imagenes/help_icon.jpg</file>
+        <file>Imagenes/boton_small.jpg</file>
+        <file>Imagenes/fondo_inicio.jpg</file>
+        <file>Imagenes/titulo.jpg</file>
+    </qresource>
+</RCC>

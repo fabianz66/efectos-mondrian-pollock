@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/fondo_inicio.jpg</file>
+        <file>images/fondo_principal.jpg</file>
+        <file>images/ventanaAjustes.jpg</file>
+        <file>images/icon.png</file>
+        <file>images/pollock.jpg</file>
+        <file>images/fondo.jpg</file>
+    </qresource>
+</RCC>
