@@ -7,9 +7,9 @@
 #include <QMessageBox>
 
 //OpenCV
-#include "cv.h"
-#include "cxcore.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/cxcore.h"
+#include "opencv/highgui.h"
 
 namespace Ui {
 class VentanaPrincipal;

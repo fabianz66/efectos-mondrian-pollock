@@ -9,9 +9,9 @@
   Cartago, Diciembre 2011
 */
 
-#include <highgui.h>
-#include <cv.h>
-#include <cxcore.h>
+#include <opencv/highgui.h>
+#include <opencv/cv.h>
+#include <opencv/cxcore.h>
 #include <time.h>
 
 //Tamano de la imagen que se muestra de la camara. La imagen original.

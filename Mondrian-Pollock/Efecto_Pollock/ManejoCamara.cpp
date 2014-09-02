@@ -1,6 +1,6 @@
 #include "ManejoCamara.h"
 
-int CAMARA_UTILIZADA = 0;
+int CAMARA_UTILIZADA = -1;
 
 ManejoCamara::ManejoCamara()
 {
