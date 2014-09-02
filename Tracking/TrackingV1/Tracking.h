@@ -3,8 +3,8 @@
 #define NUM_CAM 0
 #define TAMANO_CUADRICULA 7
 
-#include <cv.h>
-#include <highgui.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 #include <QRect>
 
 class Tracking

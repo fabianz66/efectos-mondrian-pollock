@@ -4,7 +4,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include <highgui.h>
+#include <opencv/highgui.h>
 #include <Tracking.h>
 #include <QMessageBox>
 #include <LabelImagen.h>
