@@ -35,6 +35,7 @@ void LabelImagen::mouseReleaseEvent(QMouseEvent* event)
         mMovePos.setX(temp);
     }
 
+//    cvShowImage("CUADRO",QRect(mPressPos,mMovePos));
     Tracking::getInstance().comenzarRastreo(QRect(mPressPos,mMovePos));
 
     /** Borro el cuadro q dibuje */

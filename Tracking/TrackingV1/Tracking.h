@@ -1,7 +1,8 @@
 #ifndef TRACKING_H
 #define TRACKING_H
-#define NUM_CAM 0
+#define NUM_CAM -1
 #define TAMANO_CUADRICULA 7
+#define FIREWIRE false
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
@@ -65,7 +66,7 @@ private:
     openCV, esta aparece en blanco y negro.
     Esta funcion convierte esa imagen en blanco y negro a una imagen
     a color rgb. */
-    void getRgbCameraFrame();
+    void getRgbCameraFrame(bool pFirewire);
 
     /** Se le dibuja una cuadricula a la imagen */
     void dibujarCuadricula(IplImage* /*src*/);

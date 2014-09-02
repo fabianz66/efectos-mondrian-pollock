@@ -38,7 +38,7 @@ void Tracking::iniciarImagenes()
 IplImage* Tracking::getTrackingFrame()
 {
     /** Primero se lee la imagen de la firewire camera en RGB*/
-    getRgbCameraFrame();
+    getRgbCameraFrame(FIREWIRE);
 
     //Se le dibuja la cuadricula
     dibujarCuadricula(mRgbCameraFrame);
@@ -46,18 +46,24 @@ IplImage* Tracking::getTrackingFrame()
     return mRgbCameraFrame;
 }
 
-void Tracking::getRgbCameraFrame()
+void Tracking::getRgbCameraFrame(bool pFirewire)
 {
     IplImage* camera_frame = cvQueryFrame(mCamCapture);
 
-    // set channel of interest to 1
-    cvSetImageCOI(camera_frame,1);
+    if(pFirewire)
+    {
+        // set channel of interest to 1
+        cvSetImageCOI(camera_frame,1);
 
-    //Se copia a bayer
-    cvCopy(camera_frame,mBayerImage,NULL);
+        //Se copia a bayer
+        cvCopy(camera_frame,mBayerImage,NULL);
 
-    //Se pasa a color
-    cvCvtColor(mBayerImage,mRgbCameraFrame,CV_BayerGB2RGB);
+        //Se pasa a color
+        cvCvtColor(mBayerImage,mRgbCameraFrame,CV_BayerGB2RGB);
+    }else
+    {
+        cvCopy(camera_frame, mRgbCameraFrame);
+    }
 }
 
 
@@ -92,7 +98,7 @@ void Tracking::comenzarRastreo(QRect pRectTemp)
 void Tracking::crearTemplate(CvRect box)
 {
     //Se lee la imagen de la camara, esto para que no quede con la cuadricula
-    getRgbCameraFrame();
+    getRgbCameraFrame(FIREWIRE);
 
     //Se crea una imagen para guardar el template
     IplImage* dst = cvCreateImage(cvSize(box.width, box.height),8, 3);
