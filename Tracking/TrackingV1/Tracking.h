@@ -6,7 +6,12 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
 #include <QRect>
+
+using namespace std;
+using namespace cv;
 
 class Tracking
 {
@@ -50,7 +55,7 @@ public:
     IplImage* getTrackingFrame();
 
     /** Proceso de rastreo. Recibe el rectangulo que contiene las posiciones que
-se van a tomar como template */
+    se van a tomar como template */
     void comenzarRastreo(QRect pRectTemp);
 
 private:

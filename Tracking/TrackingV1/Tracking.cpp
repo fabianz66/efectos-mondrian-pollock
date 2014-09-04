@@ -1,4 +1,5 @@
 #include "Tracking.h"
+#include <QDebug>
 
 Tracking::Tracking()
 {
@@ -39,6 +40,48 @@ IplImage* Tracking::getTrackingFrame()
 {
     /** Primero se lee la imagen de la firewire camera en RGB*/
     getRgbCameraFrame(FIREWIRE);
+
+    if(mTemplateImage)
+    {
+        /// Source image to display
+        Mat original(mRgbCameraFrame);
+        Mat templ (mTemplateImage);
+        Mat result;
+
+        /// Source image to display
+        Mat img_display;
+        original.copyTo( img_display );
+
+        /// Create the result matrix
+        int result_cols =  original.cols - templ.cols + 1;
+        int result_rows = original.rows - templ.rows + 1;
+
+        result.create( result_cols, result_rows, CV_32FC1 );
+
+        /// Do the Matching and Normalize
+        int match_method = 0;
+        matchTemplate( original, templ, result, match_method );
+        normalize( result, result, 0, 1, NORM_MINMAX, -1, Mat() );
+
+        /// Localizing the best match with minMaxLoc
+        double minVal; double maxVal; Point minLoc; Point maxLoc;
+        Point matchLoc;
+
+        minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
+
+        /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
+        if( match_method  == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED )
+        { matchLoc = minLoc; }
+        else
+        { matchLoc = maxLoc; }
+
+        /// Show me what you got
+        rectangle( img_display, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), Scalar::all(0), 2, 8, 0 );
+        rectangle( result, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), Scalar::all(0), 2, 8, 0 );
+
+        imshow( "image_window", img_display );
+        imshow( "result_window", result );
+    }
 
     //Se le dibuja la cuadricula
     dibujarCuadricula(mRgbCameraFrame);
@@ -91,7 +134,9 @@ void Tracking::dibujarCuadricula(IplImage* src)
 
 void Tracking::comenzarRastreo(QRect pRectTemp)
 {
+    qDebug() << "AAAAAAAA";
     CvRect box = cvRect(pRectTemp.x(), pRectTemp.y(), pRectTemp.width(), pRectTemp.height());
+    qDebug() << "BBBBBBBB";
     crearTemplate(box);
 }
 
@@ -100,21 +145,25 @@ void Tracking::crearTemplate(CvRect box)
     //Se lee la imagen de la camara, esto para que no quede con la cuadricula
     getRgbCameraFrame(FIREWIRE);
 
+    qDebug() << "CCCCCCCC";
     //Se crea una imagen para guardar el template
     IplImage* dst = cvCreateImage(cvSize(box.width, box.height),8, 3);
 
+    qDebug() << "DDDDDDDDD";
     //Se toma el area del rectangulo
     CvMat* template_img_area = cvGetSubRect( (CvMat*)mRgbCameraFrame, (CvMat*)dst, box);
 
     if(mTemplateImage)
         cvReleaseImage(&mTemplateImage);
 
+    qDebug() << "EEEEEEEEEE";
     //Se guarda la imagen
     mTemplateImage = cvCreateImage(cvGetSize(template_img_area), 8, 3);
     cvCopy(template_img_area, mTemplateImage);
 
-    cvReleaseImage(&dst);
-    cvReleaseMat(&template_img_area);
+    qDebug() << "FFFFFFFFF";
+    //    cvReleaseImage(&dst);
+    //    cvReleaseMat(&template_img_area);
     cvShowImage("Template", mTemplateImage);
 
 }
