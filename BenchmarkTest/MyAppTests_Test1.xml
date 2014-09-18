@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TestCase name="BenchmarkTestTest">
+<Environment>
+    <QtVersion>4.8.1</QtVersion>
+    <QTestVersion>4.8.1</QTestVersion>
+</Environment>
+<TestFunction name="initTestCase">
+<Incident type="pass" file="" line="0" />
+</TestFunction>
+<TestFunction name="testCase1">
+<BenchmarkResult metric="WalltimeMilliseconds" tag="" value="86" iterations="1048576" />
+<Incident type="pass" file="" line="0" />
+</TestFunction>
+<TestFunction name="cleanupTestCase">
+<Incident type="pass" file="" line="0" />
+</TestFunction>
+</TestCase>
