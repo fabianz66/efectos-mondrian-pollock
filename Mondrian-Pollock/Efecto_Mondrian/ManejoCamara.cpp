@@ -38,8 +38,13 @@ void ManejoCamara::SetCamara(int rNumeroCam)
     mCamCapture = cvCreateCameraCapture(rNumeroCam);
 
     //Se manda la imagen modelo para crear las demas
-    mImagenActualCamara = cvQueryFrame(mCamCapture);
-    CrearImagenes(mImagenActualCamara);
+    do{
+        mImagenActualCamara = cvQueryFrame(mCamCapture);
+
+        CrearImagenes(mImagenActualCamara);
+
+    }while(mImagenActualCamara == NULL);
+
 }
 
 /*
@@ -57,24 +62,27 @@ se recibe como parametro una imagen modelo para tomar las medidas y la profundid
 */
 void ManejoCamara::CrearImagenes(IplImage* rModeloImagen)
 {
-    //Se toman las medidas de la foto
-    CvSize size = cvGetSize(rModeloImagen);
+    if(rModeloImagen != NULL){
 
-    //Se inician las imagenes de un solo canal
-    //Estas son imagenes a escala de grises, por lo tanto no van a utilziar los 3 canales
-    mImagenFondo = cvCreateImage(size, rModeloImagen->depth , 1);
-    mImagenActualCamaraGrises = cvCreateImage(size, rModeloImagen->depth , 1);
-    mImagenDiferencia = cvCreateImage(size, rModeloImagen->depth , 1);
+        //Se toman las medidas de la foto
+        CvSize size = cvGetSize(rModeloImagen);
 
-    //Se carga una imagen de fondo por default
-    mImagenFondoMondrian = cvLoadImage("../Efecto_Mondrian/Imagenes/mondrian1.jpg");
+        //Se inician las imagenes de un solo canal
+        //Estas son imagenes a escala de grises, por lo tanto no van a utilziar los 3 canales
+        mImagenFondo = cvCreateImage(size, rModeloImagen->depth , 1);
+        mImagenActualCamaraGrises = cvCreateImage(size, rModeloImagen->depth , 1);
+        mImagenDiferencia = cvCreateImage(size, rModeloImagen->depth , 1);
 
-    //Se crean la imagen que va a contener la cilueta rellena, de 3 canales porq va ser a color
-    mImagenRellenaMondrian = cvCreateImage(size, mImagenFondoMondrian->depth , mImagenFondoMondrian->nChannels);
+        //Se carga una imagen de fondo por default
+        mImagenFondoMondrian = cvLoadImage("Imagenes/mondrian1.jpg");
 
-    //Se crean los punteros a la informacion de las imagenes que se van a utilizar para crear la imagen que se va a rellenar con la imagen de Mondrian
-    pDataImagenFondoMondrian   = (uchar*)mImagenFondoMondrian->imageData;
-    pDataImagenRellenaMondrian   = (uchar*)mImagenRellenaMondrian->imageData;
+        //Se crean la imagen que va a contener la cilueta rellena, de 3 canales porq va ser a color
+        mImagenRellenaMondrian = cvCreateImage(size, mImagenFondoMondrian->depth , mImagenFondoMondrian->nChannels);
+
+        //Se crean los punteros a la informacion de las imagenes que se van a utilizar para crear la imagen que se va a rellenar con la imagen de Mondrian
+        pDataImagenFondoMondrian   = (uchar*)mImagenFondoMondrian->imageData;
+        pDataImagenRellenaMondrian   = (uchar*)mImagenRellenaMondrian->imageData;
+    }
 }
 
 /*
@@ -158,7 +166,7 @@ void ManejoCamara::RellenarImagenMondrian()
 Funcion que cambia la iamgen a utilizar de fondo para rellenar la cilueta
 Se cambia cuando el segundo actual es multiplo de 3, se escoje una imagen aleatoria
 */
-int numero_imagen =0;
+int numero_imagen = 0;
 bool imagen_cambiada = false;
 void ManejoCamara::GeneraImagenFondoMondrian()
 {
@@ -171,7 +179,7 @@ void ManejoCamara::GeneraImagenFondoMondrian()
         //Se convierte a string
         stringstream st;
         st << numero_imagen++;
-        string nombre_imagen  = "../Efecto_Mondrian/Imagenes/mondrian"+ st.str()+".jpg";
+        string nombre_imagen  = "Imagenes/mondrian"+ st.str()+".jpg";
 
         //Se carga la imagen de Mondrian para relleno
         IplImage* nuevo_fondo = cvLoadImage(nombre_imagen.c_str());
@@ -180,7 +188,7 @@ void ManejoCamara::GeneraImagenFondoMondrian()
         cvCopy(nuevo_fondo, mImagenFondoMondrian);
 
         //Se libera la imagen
-        cvReleaseImage(&nuevo_fondo);
+        //        cvReleaseImage(&nuevo_fondo);
 
         //Se indica que ya se cambio la imagen por ese segundo
         imagen_cambiada = true;

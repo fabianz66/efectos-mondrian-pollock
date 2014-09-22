@@ -16,9 +16,9 @@
 #include <QMessageBox>
 #include <QTimer>
 #include <Observable.h>
-#include <highgui.h>
-#include <cv.h>
-#include <cvaux.h>
+#include <opencv/highgui.h>
+#include <opencv/cv.h>
+#include <opencv/cvaux.h>
 
 namespace Ui {
     class VentanaPrincipal;

@@ -20,9 +20,9 @@ fondo
 */
 
 //INCLUDES
-#include <highgui.h>
-#include <cv.h>
-#include <cxcore.h>
+#include <opencv/highgui.h>
+#include <opencv/cv.h>
+#include <opencv/cxcore.h>
 #include <iostream>
 #include <string>
 #include <QTime>
