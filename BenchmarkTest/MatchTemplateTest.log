@@ -1,0 +1,5 @@
+Entered test-function: initTestCase
+Entered test-function: BasicMatchTemplate
+Entered test-function: ParallelMatchTemplate
+Entered test-function: GPUMatchTemplate
+Entered test-function: cleanupTestCase

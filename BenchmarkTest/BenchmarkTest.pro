@@ -8,6 +8,9 @@ QT       += testlib
 
 QT       -= gui
 
+# OpenCV
+CVCFG = $$system(/bin/echo "pkg-config opencv")
+
 TARGET = tst_benchmarktesttest
 CONFIG   += console
 CONFIG   -= app_bundle
@@ -15,7 +18,14 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 
-SOURCES += tst_benchmarktesttest.cpp
+SOURCES += \
+    main.cpp \
+    MatchTemplateTest.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
-HEADERS +=
+HEADERS += \
+    MatchTemplateTest.h
+
+CVLIB = $$system($$CVCFG --libs)
+
+LIBS += $$CVLIB
