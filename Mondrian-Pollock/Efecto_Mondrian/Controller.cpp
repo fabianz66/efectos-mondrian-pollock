@@ -34,7 +34,7 @@ void Controller::ActualizaImagenesCamara()
    mVentanaPrincipal->MostrarImagenes(mManejoCamara->GetImagenEfectoMondrian(), mManejoCamara->GetImagenVideoCamara());
 }
 
-void Controller::IniciarVentana()
+void Controller:: IniciarVentana()
 {
     mVentanaPrincipal = new (VentanaPrincipal);
     mVentanaPrincipal->AddObserver(this);

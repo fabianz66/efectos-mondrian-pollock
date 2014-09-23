@@ -27,7 +27,7 @@ enum TECLAS_ASCII {TECLA_ESC = 27,
                    TECLA_ENTER = 13};
 
 /*numero de camara a utilizar*/
-int num_cam = 0;
+int num_cam = 1;
 
 /*Este boolean indica si se debe mostrar la camara*/
 bool mostrar_efecto = false;
@@ -90,7 +90,7 @@ void mostrarCamaraOriginal()
 
 void mostrarEfectoMondrian()
 {
-    /* //Se crea una imagen de la imagen actual pero a escala de grises
+    //Se crea una imagen de la imagen actual pero a escala de grises
     cvCvtColor(frame_original_camara, mImagenActualCamaraGrises, CV_RGB2GRAY);
 
     //Se saca la diferencia de imagenes
@@ -105,12 +105,12 @@ void mostrarEfectoMondrian()
 
     return mImagenRellenaMondrian;
 
-    int num = 4;
+//    int num = 4;
    // if((clock()/1000)%5 == 0)
   //  {
   //      num += 1; num = num%5;
    // }*/
-    cvShowImage("Mondrian Effect - LuTec Project", pinturas_mondrian[0]);
+//    cvShowImage("Mondrian Effect - LuTec Project", pinturas_mondrian[0]);
 }
 
 
