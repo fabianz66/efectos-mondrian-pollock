@@ -1,11 +1,6 @@
 #ifndef VideoLoader_H
 #define VideoLoader_H
 
-#include <opencv2/opencv.hpp>
-#include <QThread>
-
-using namespace cv;
-
 /**
  * Sirve para manejar la toma de imagenes ya sea de camara o de video.
  * Las imagenes se reciben por medio de signals.
@@ -27,6 +22,12 @@ using namespace cv;
  *
  **/
 
+#include <opencv2/opencv.hpp>
+#include <QThread>
+#include <QTimer>
+
+using namespace cv;
+
 class VideoLoader : public QThread
 {
 
@@ -45,9 +46,12 @@ private:
 
     /** Atributos */
     VideoCapture mVideoCap;
+    CvCapture* mCamCapture;
 
     /** Metodos */
     void run();
+
+private slots:
     void notifyWithFrame();
 };
 

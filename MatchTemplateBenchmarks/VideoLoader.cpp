@@ -13,7 +13,22 @@ VideoLoader::VideoLoader()
 
 bool VideoLoader::startCaptureFromCamera()
 {
-    return false;
+//    if(mCamCapture)
+//    {
+//        printf( "\nCamara ya en uso... startCaptureFromCamera\n\n" );
+//        return false;
+//    }
+
+    mCamCapture = cvCreateCameraCapture(-1);
+    if(!mCamCapture)
+    {
+        printf( "\nCamara no iniciada... startCaptureFromCamera\n\n" );
+        return false;
+    }
+
+    /** Como ya se cargo inicia un timer para que envie las imagenes al listener */
+    this->start();
+    return true;
 }
 
 bool VideoLoader::startCaptureFromVideo()
@@ -64,6 +79,15 @@ void VideoLoader::notifyWithFrame()
     if(mVideoCap.grab())
     {
         mVideoCap >> frame;
+
+        //Notifica a quien este conectado
+        emit onNewImageCaptured(frame);
+        return;
+    }
+
+    if(mCamCapture)
+    {
+        frame = cvQueryFrame(mCamCapture);
 
         //Notifica a quien este conectado
         emit onNewImageCaptured(frame);

@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Connect each Widget to correcponding thread
     connect(vl, SIGNAL(onNewImageCaptured(Mat)), this, SLOT(imgReceived(Mat)));
 
-    vl->startCaptureFromVideo();
+//    vl->startCaptureFromVideo();
+    vl->startCaptureFromCamera();
 }
 
 MainWindow::~MainWindow()

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'VideoLoader.h'
 **
-** Created: Mon Sep 29 21:07:12 2014
+** Created: Mon Sep 29 21:54:46 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_VideoLoader[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,11 +33,15 @@ static const uint qt_meta_data_VideoLoader[] = {
  // signals: signature, parameters, type, tag, flags
       13,   12,   12,   12, 0x05,
 
+ // slots: signature, parameters, type, tag, flags
+      37,   12,   12,   12, 0x08,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_VideoLoader[] = {
     "VideoLoader\0\0onNewImageCaptured(Mat)\0"
+    "notifyWithFrame()\0"
 };
 
 void VideoLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -47,6 +51,7 @@ void VideoLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         VideoLoader *_t = static_cast<VideoLoader *>(_o);
         switch (_id) {
         case 0: _t->onNewImageCaptured((*reinterpret_cast< Mat(*)>(_a[1]))); break;
+        case 1: _t->notifyWithFrame(); break;
         default: ;
         }
     }
@@ -84,9 +89,9 @@ int VideoLoader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }
