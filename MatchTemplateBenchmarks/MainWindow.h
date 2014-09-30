@@ -20,7 +20,7 @@ public:
     ~MainWindow();
     
 private slots:
-    void onNewImageCaptured(Mat&);
+    void imgReceived(Mat image);
 
 private:
     Ui::MainWindow *ui;

@@ -9,7 +9,6 @@
 
 VideoLoader::VideoLoader()
 {
-
 }
 
 bool VideoLoader::startCaptureFromCamera()
