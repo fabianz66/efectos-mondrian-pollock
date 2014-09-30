@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qDebug() << "CUDA ENABLED" << gpu::getCudaEnabledDeviceCount();
 
-    //    mVideoLoader->startCaptureFromVideo();
-    mVideoLoader->startCaptureFromCamera();
+        mVideoLoader->startCaptureFromVideo();
+//    mVideoLoader->startCaptureFromCamera();
 
     /// =================== MATCH TEMPLATE TESTS ========================= ///
 

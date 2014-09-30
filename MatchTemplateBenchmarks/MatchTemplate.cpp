@@ -45,7 +45,7 @@ void MatchTemplate::normal()
     Mat result;
     int result_cols =  mOriginalImage.cols - mTemplateImg.cols + 1;
     int result_rows = mOriginalImage.rows - mTemplateImg.rows + 1;
-    result.create( result_cols, result_rows, CV_32FC1 );
+    result.create( result_rows, result_cols, CV_32FC1 );
 
     /// Realiza el match template
     matchTemplate( mOriginalImage, mTemplateImg, result, MATCH_METHOD );
@@ -90,16 +90,39 @@ void MatchTemplate::tbb( Mat original)
 void MatchTemplate::tbb()
 {
     /// Create result image
-    cv::Mat result;
+    /// Se crea una imagen resultado del tamano necesario para que solo se tenga que dividir por 4 en
+    /// TBB.
+    /// IMPORTANTE: Cuando se divide las imagenes se dividen por cantidad de filas
+    ///   --------------------
+    ///   |                  |
+    ///   --------------------
+    ///   |                  |
+    ///   --------------------
+    ///   |                  |
+    ///   --------------------
+    Mat result;
     int result_cols =  mOriginalImage.cols - mTemplateImg.cols + 1;
-    int result_rows = mOriginalImage.rows - mTemplateImg.rows + 1;
-//    result.create(mOriginalImage.size(), mOriginalImage.type());
-    result.create( result_cols, result_rows, CV_32FC1 );
+    int result_rows = mOriginalImage.rows - mTemplateImg.rows*FRAMES_PER_IMAGE_TBB + FRAMES_PER_IMAGE_TBB;
+    result.create( result_rows, result_cols, CV_32FC1 );
 
     /// create 8 threads and use TBB
-    cv::parallel_for_(cv::Range(0, 8), MatchTemplateTBB(mOriginalImage, mTemplateImg, result, 5, 8));
+    cv::parallel_for_(cv::Range(0, FRAMES_PER_IMAGE_TBB), MatchTemplateTBB(mOriginalImage, result, mTemplateImg, FRAMES_PER_IMAGE_TBB));
 
-    qDebug() << "END";
+    /// =========== BUSCA EL MEJOR MATCH =================
+    /// Una vez realizado el match template por la imagen se busca el mejor match en la imagen completa
+    /// Localizing the best match with minMaxLoc
+    double minVal; double maxVal; Point minLoc; Point maxLoc; Point matchLoc;
+    minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
+
+    /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
+    if( MATCH_METHOD  == CV_TM_SQDIFF || MATCH_METHOD == CV_TM_SQDIFF_NORMED )
+    { matchLoc = minLoc; }
+    else
+    { matchLoc = maxLoc; }
+
+    /// Show me what you got
+    rectangle( result, matchLoc, Point( matchLoc.x + mTemplateImg.cols , matchLoc.y + mTemplateImg.rows ), Scalar::all(0), 2, 8, 0 );
+
     /// Notifica a quien este conectado
     emit onMatchTemplateFinished(result);
 }
