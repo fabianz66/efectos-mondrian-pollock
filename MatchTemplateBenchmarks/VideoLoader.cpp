@@ -13,12 +13,6 @@ VideoLoader::VideoLoader()
 
 bool VideoLoader::startCaptureFromCamera()
 {
-//    if(mCamCapture)
-//    {
-//        printf( "\nCamara ya en uso... startCaptureFromCamera\n\n" );
-//        return false;
-//    }
-
     mCamCapture = cvCreateCameraCapture(-1);
     if(!mCamCapture)
     {

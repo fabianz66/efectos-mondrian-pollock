@@ -1,8 +1,7 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "QDebug"
-
-
+#include "MatchTemplate.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,15 +9,25 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    VideoLoader* vl = new VideoLoader();
+    /// =================== MATCH TEMPLATE TESTS ========================= ///
 
+    namedWindow("original", 1);
+    namedWindow("result", 1);
+    mVideoLoader = new VideoLoader();
+    mMatchTempl = new MatchTemplate();
+
+    //Registra el evento de nueva imagen recibida y de match template terminado
     qRegisterMetaType< cv::Mat >("Mat");
+    connect(mVideoLoader, SIGNAL(onNewImageCaptured(Mat)), this, SLOT(imgReceived(Mat)));
+    connect(mMatchTempl, SIGNAL(onMatchTemplateFinished(Mat)), this, SLOT(matchReceived(Mat)));
 
-    // Connect each Widget to correcponding thread
-    connect(vl, SIGNAL(onNewImageCaptured(Mat)), this, SLOT(imgReceived(Mat)));
+    qDebug() << "CUDA ENABLED" << gpu::getCudaEnabledDeviceCount();
 
-//    vl->startCaptureFromVideo();
-    vl->startCaptureFromCamera();
+    mVideoLoader->startCaptureFromVideo();
+    //    vl->startCaptureFromCamera();
+
+    /// =================== MATCH TEMPLATE TESTS ========================= ///
+
 }
 
 MainWindow::~MainWindow()
@@ -28,7 +37,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::imgReceived(Mat image)
 {
-    qDebug() << "12";
-    namedWindow("video", 1);
-    imshow("video", image);
+    if(mMatchTempl->isRunning()) {
+        qDebug() << "isRunning - Brinque esta imagen";
+    }else {
+        qDebug() << "NOT Running - Aplique matching";
+        mMatchTempl->normal(image);
+    }
+
+    imshow("original", image);
+
+//    image.release();
+}
+
+void MainWindow::matchReceived(Mat image)
+{
+    imshow("result", image);
+
+//    image.release();
 }

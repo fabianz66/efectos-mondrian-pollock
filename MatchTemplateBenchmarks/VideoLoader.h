@@ -4,7 +4,7 @@
 /**
  * Sirve para manejar la toma de imagenes ya sea de camara o de video.
  * Las imagenes se reciben por medio de signals.
- *
+ * REF: http://www.qtcentre.org/wiki/index.php?title=MyThread.h
  *
  * Ejemplo de uso:
  *
