@@ -2,11 +2,14 @@
 CVCFG = $$system(/bin/echo "pkg-config opencv")
 
 HEADERS += \
-    videoloader.h
+    VideoLoader.h \
+    VideoLoaderListener.h \
+    Test.h
 
 SOURCES += \
-    videoloader.cpp \
-    main.cpp
+    main.cpp \
+    VideoLoader.cpp \
+    Test.cpp
 
 CVLIB = $$system($$CVCFG --libs)
 
