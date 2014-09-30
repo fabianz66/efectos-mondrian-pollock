@@ -1,15 +1,9 @@
 #include "MatchTemplate.h"
 #include "QDebug"
 
-#define MATCH_METHOD 0
-
-
-
 MatchTemplate::MatchTemplate()
 {
     mTemplateImg = cvLoadImage("resources/template.jpg");
-    namedWindow("template",1);
-    imshow("template", mTemplateImg);
 }
 
 /**
@@ -17,9 +11,12 @@ MatchTemplate::MatchTemplate()
   */
 void MatchTemplate::run()
 {
-    if(mMetodo == 0)
+    if(mMetodo == 0) //NORMAL
     {
         this->normal();
+    }else if(mMetodo == 1) //TBB
+    {
+        this->tbb();
     }
 }
 
@@ -71,14 +68,40 @@ void MatchTemplate::normal()
     emit onMatchTemplateFinished(result);
 }
 
-void MatchTemplate::tbb( Mat image)
+/**
+  * Inicia el proceso de match_template usando tbb en un hilo aparte
+  * Cuando termina el matchTemplate invoca la signal onMatchTemplateFinished(Mat)
+  * Por lo que debe hacerse un connect() antes de llamarse
+  **/
+void MatchTemplate::tbb( Mat original)
 {
+    /// Guarda la imagen por modificar
+    mOriginalImage = original;
 
+    /// Llama al metodo en un hilo aparte
+    mMetodo = 1;
+    this->start();
 }
 
+/**
+  * Logica que realiza el match_template con tbb.
+  * Se llama dentro de normal(Mat)
+  **/
 void MatchTemplate::tbb()
 {
+    /// Create result image
+    cv::Mat result;
+    int result_cols =  mOriginalImage.cols - mTemplateImg.cols + 1;
+    int result_rows = mOriginalImage.rows - mTemplateImg.rows + 1;
+//    result.create(mOriginalImage.size(), mOriginalImage.type());
+    result.create( result_cols, result_rows, CV_32FC1 );
 
+    /// create 8 threads and use TBB
+    cv::parallel_for_(cv::Range(0, 8), MatchTemplateTBB(mOriginalImage, mTemplateImg, result, 5, 8));
+
+    qDebug() << "END";
+    /// Notifica a quien este conectado
+    emit onMatchTemplateFinished(result);
 }
 
 void MatchTemplate::gpu( Mat image )

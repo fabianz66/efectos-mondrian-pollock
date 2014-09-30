@@ -20,7 +20,9 @@ SOURCES += main.cpp\
 
 HEADERS  += MainWindow.h \
     VideoLoader.h \
-    MatchTemplate.h
+    MatchTemplate.h \
+    MatchTemplateTBB.h \
+    Constantes.h
 
 FORMS    += mainwindow.ui
 

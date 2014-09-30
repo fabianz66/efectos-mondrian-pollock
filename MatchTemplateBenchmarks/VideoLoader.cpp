@@ -2,10 +2,7 @@
 #include "stdio.h"
 #include "QElapsedTimer"
 #include "QDebug"
-
-
-#define CAMERA_NUM -1
-#define DELAY_BETWEEN_FRAMES_MS 25
+#include "Constantes.h"
 
 VideoLoader::VideoLoader()
 {

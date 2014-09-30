@@ -3,6 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <QThread>
+#include "MatchTemplateTBB.h"
 
 using namespace cv;
 
@@ -34,9 +35,9 @@ private:
 
 public:
     MatchTemplate();
-    void normal( Mat image );
-    void tbb( Mat image );
-    void gpu( Mat image );
+    void normal( Mat original );
+    void tbb( Mat original );
+    void gpu( Mat original );
 
 signals:
     void onMatchTemplateFinished(Mat);

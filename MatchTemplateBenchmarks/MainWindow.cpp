@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qDebug() << "CUDA ENABLED" << gpu::getCudaEnabledDeviceCount();
 
-    mVideoLoader->startCaptureFromVideo();
-    //    vl->startCaptureFromCamera();
+    //    mVideoLoader->startCaptureFromVideo();
+    mVideoLoader->startCaptureFromCamera();
 
     /// =================== MATCH TEMPLATE TESTS ========================= ///
 
@@ -41,17 +41,19 @@ void MainWindow::imgReceived(Mat image)
         qDebug() << "isRunning - Brinque esta imagen";
     }else {
         qDebug() << "NOT Running - Aplique matching";
-        mMatchTempl->normal(image);
+//                mMatchTempl->normal(image);
+
+        mMatchTempl->tbb(image);
     }
 
     imshow("original", image);
 
-//    image.release();
+    //    image.release();
 }
 
 void MainWindow::matchReceived(Mat image)
 {
     imshow("result", image);
 
-//    image.release();
+    //    image.release();
 }
