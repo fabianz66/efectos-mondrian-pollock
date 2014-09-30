@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MainWindow.h'
 **
-** Created: Tue Sep 30 13:41:54 2014
+** Created: Tue Sep 30 14:47:43 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,13 +33,19 @@ static const uint qt_meta_data_MainWindow[] = {
  // slots: signature, parameters, type, tag, flags
       18,   12,   11,   11, 0x08,
       35,   12,   11,   11, 0x08,
+      55,   11,   11,   11, 0x08,
+      81,   11,   11,   11, 0x08,
+     104,   11,   11,   11, 0x08,
+     128,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0image\0imgReceived(Mat)\0"
-    "matchReceived(Mat)\0"
+    "MainWindow\0\0image\0imgCaptured(Mat)\0"
+    "matchCompleted(Mat)\0on_video_normal_clicked()\0"
+    "on_video_tbb_clicked()\0on_cam_normal_clicked()\0"
+    "on_cam_tbb_clicked()\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -48,8 +54,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_ASSERT(staticMetaObject.cast(_o));
         MainWindow *_t = static_cast<MainWindow *>(_o);
         switch (_id) {
-        case 0: _t->imgReceived((*reinterpret_cast< Mat(*)>(_a[1]))); break;
-        case 1: _t->matchReceived((*reinterpret_cast< Mat(*)>(_a[1]))); break;
+        case 0: _t->imgCaptured((*reinterpret_cast< Mat(*)>(_a[1]))); break;
+        case 1: _t->matchCompleted((*reinterpret_cast< Mat(*)>(_a[1]))); break;
+        case 2: _t->on_video_normal_clicked(); break;
+        case 3: _t->on_video_tbb_clicked(); break;
+        case 4: _t->on_cam_normal_clicked(); break;
+        case 5: _t->on_cam_tbb_clicked(); break;
         default: ;
         }
     }
@@ -87,9 +97,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 6;
     }
     return _id;
 }

@@ -6,6 +6,8 @@
 #include "Constantes.h"
 #include <opencv2/opencv.hpp>
 #include "QDebug"
+#include <QList>
+#include <QHash>
 
 using namespace cv;
 
@@ -31,7 +33,6 @@ public:
 
         mOriginalSubFrameHeight = inputImage.rows / (subFrames);
         mResultSubFrameHeight = outImage.rows / (subFrames);
-
     }
 
     virtual void operator()(const cv::Range& range) const

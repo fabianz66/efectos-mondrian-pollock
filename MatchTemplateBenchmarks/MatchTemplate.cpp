@@ -1,5 +1,7 @@
 #include "MatchTemplate.h"
 #include "QDebug"
+#include <QList>
+#include <Helpers.h>
 
 MatchTemplate::MatchTemplate()
 {
@@ -11,10 +13,10 @@ MatchTemplate::MatchTemplate()
   */
 void MatchTemplate::run()
 {
-    if(mMetodo == 0) //NORMAL
+    if(mMetodo == MATCH_NORMAL) //NORMAL
     {
         this->normal();
-    }else if(mMetodo == 1) //TBB
+    }else if(mMetodo == MATCH_TBB) //TBB
     {
         this->tbb();
     }
@@ -31,7 +33,7 @@ void MatchTemplate::normal( Mat original )
     mOriginalImage = original;
 
     /// Llama al metodo en un hilo aparte
-    mMetodo = 0;
+    mMetodo = MATCH_NORMAL;
     this->start();
 }
 
@@ -79,7 +81,7 @@ void MatchTemplate::tbb( Mat original)
     mOriginalImage = original;
 
     /// Llama al metodo en un hilo aparte
-    mMetodo = 1;
+    mMetodo = MATCH_TBB;
     this->start();
 }
 
@@ -89,17 +91,19 @@ void MatchTemplate::tbb( Mat original)
   **/
 void MatchTemplate::tbb()
 {
-    /// Create result image
-    /// Se crea una imagen resultado del tamano necesario para que solo se tenga que dividir por 4 en
-    /// TBB.
-    /// IMPORTANTE: Cuando se divide las imagenes se dividen por cantidad de filas
-    ///   --------------------
-    ///   |                  |
-    ///   --------------------
-    ///   |                  |
-    ///   --------------------
-    ///   |                  |
-    ///   --------------------
+    /**
+    * Se crea una imagen resultado del tamano necesario para que solo se tenga que dividir por 4 en
+    * TBB.
+    * IMPORTANTE: Cuando se divide las imagenes se dividen por cantidad de filas
+    *   --------------------
+    *   |                  |
+    *   --------------------
+    *   |                  |
+    *   --------------------
+    *   |                  |
+    *   --------------------
+    **/
+
     Mat result;
     int result_cols =  mOriginalImage.cols - mTemplateImg.cols + 1;
     int result_rows = mOriginalImage.rows - mTemplateImg.rows*FRAMES_PER_IMAGE_TBB + FRAMES_PER_IMAGE_TBB;
@@ -108,17 +112,14 @@ void MatchTemplate::tbb()
     /// create 8 threads and use TBB
     cv::parallel_for_(cv::Range(0, FRAMES_PER_IMAGE_TBB), MatchTemplateTBB(mOriginalImage, result, mTemplateImg, FRAMES_PER_IMAGE_TBB));
 
-    /// =========== BUSCA EL MEJOR MATCH =================
-    /// Una vez realizado el match template por la imagen se busca el mejor match en la imagen completa
-    /// Localizing the best match with minMaxLoc
-    double minVal; double maxVal; Point minLoc; Point maxLoc; Point matchLoc;
+    /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
+    double minVal; double maxVal; Point minLoc; Point maxLoc, matchLoc;
     minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
 
-    /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
     if( MATCH_METHOD  == CV_TM_SQDIFF || MATCH_METHOD == CV_TM_SQDIFF_NORMED )
-    { matchLoc = minLoc; }
+        matchLoc = minLoc;
     else
-    { matchLoc = maxLoc; }
+        matchLoc = maxLoc;
 
     /// Show me what you got
     rectangle( result, matchLoc, Point( matchLoc.x + mTemplateImg.cols , matchLoc.y + mTemplateImg.rows ), Scalar::all(0), 2, 8, 0 );

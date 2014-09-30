@@ -15,14 +15,16 @@ CVCFG = $$system(/bin/echo "pkg-config opencv")
 SOURCES += main.cpp\
         MainWindow.cpp \
     VideoLoader.cpp \
-    MatchTemplate.cpp
+    MatchTemplate.cpp \
+    Helpers.cpp
 
 
 HEADERS  += MainWindow.h \
     VideoLoader.h \
     MatchTemplate.h \
     MatchTemplateTBB.h \
-    Constantes.h
+    Constantes.h \
+    Helpers.h
 
 FORMS    += mainwindow.ui
 

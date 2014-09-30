@@ -27,15 +27,20 @@ public:
     ~MainWindow();
     
 private slots:
-    void imgReceived(Mat image);
-    void matchReceived(Mat image);
+    void imgCaptured(Mat image);
+    void matchCompleted(Mat image);
+    void on_video_normal_clicked();
+    void on_video_tbb_clicked();
+    void on_cam_normal_clicked();
+    void on_cam_tbb_clicked();
 
 private:
     Ui::MainWindow *ui;
 
-    /// TEMPLATE TESTS
+    /// Variables
     MatchTemplate* mMatchTempl;
     VideoLoader* mVideoLoader;
+    int mMatchMethod;
 };
 
 #endif // MAINWINDOW_H
