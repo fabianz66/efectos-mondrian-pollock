@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Sep 30 16:09:42 2014
+** Created: Tue Sep 30 23:38:39 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -36,6 +36,7 @@ public:
     QPushButton *cam_normal;
     QPushButton *cam_tbb;
     QPushButton *detener;
+    QPushButton *benchmark_btn;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -67,7 +68,10 @@ public:
         cam_tbb->setGeometry(QRect(190, 100, 98, 27));
         detener = new QPushButton(centralWidget);
         detener->setObjectName(QString::fromUtf8("detener"));
-        detener->setGeometry(QRect(120, 140, 98, 27));
+        detener->setGeometry(QRect(50, 140, 98, 27));
+        benchmark_btn = new QPushButton(centralWidget);
+        benchmark_btn->setObjectName(QString::fromUtf8("benchmark_btn"));
+        benchmark_btn->setGeometry(QRect(190, 140, 98, 27));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -95,6 +99,7 @@ public:
         cam_normal->setText(QApplication::translate("MainWindow", "Normal", 0, QApplication::UnicodeUTF8));
         cam_tbb->setText(QApplication::translate("MainWindow", "TBB", 0, QApplication::UnicodeUTF8));
         detener->setText(QApplication::translate("MainWindow", "Detener", 0, QApplication::UnicodeUTF8));
+        benchmark_btn->setText(QApplication::translate("MainWindow", "Benchmark", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

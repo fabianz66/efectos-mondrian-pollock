@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "QDebug"
 #include "MatchTemplate.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Inicia las variables
     mVideoLoader = new VideoLoader();
     mMatchTempl = new MatchTemplate();
+    mBenchmark = &Benchmark::getInstance();
 
     //Registra el evento de nueva imagen recibida y de match template terminado
     qRegisterMetaType< cv::Mat >("Mat");
@@ -27,16 +29,28 @@ MainWindow::~MainWindow()
 /** Recibe el evento de una nueva imagen en la camara o video */
 void MainWindow::imgCaptured(Mat image)
 {
+
     if(mMatchTempl->isRunning()) {
-        qDebug() << "isRunning - Brinque esta imagen";
-    }else {
-        qDebug() << "NOT Running - Aplique matching";
 
         if(mMatchMethod == MATCH_NORMAL)
         {
+            mBenchmark->setSkipImage("Normal");
+        }else if(mMatchMethod == MATCH_TBB)
+        {
+            mBenchmark->setSkipImage("TBB");
+        }
+
+        //qDebug() << "isRunning - Brinque esta imagen";
+    }else {
+        //qDebug() << "NOT Running - Aplique matching";
+
+        if(mMatchMethod == MATCH_NORMAL)
+        {
+            mBenchmark->setGetImage("Normal");
             mMatchTempl->normal(image);
         }else if(mMatchMethod == MATCH_TBB)
         {
+            mBenchmark->setGetImage("TBB");
             mMatchTempl->tbb(image);
         }
     }
@@ -97,4 +111,13 @@ void MainWindow::on_cam_tbb_clicked()
 void MainWindow::on_detener_clicked()
 {
     mVideoLoader->stop();
+}
+
+void MainWindow::on_benchmark_btn_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                               "/home/",
+                               tr("CVS (*.cvs)"));
+
+    mBenchmark->setPath(fileName);
 }

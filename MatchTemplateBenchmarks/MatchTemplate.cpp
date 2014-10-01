@@ -6,6 +6,7 @@
 MatchTemplate::MatchTemplate()
 {
     mTemplateImg = cvLoadImage("resources/template.jpg");
+    mBenchmark = &Benchmark::getInstance();
 }
 
 /**
@@ -13,12 +14,18 @@ MatchTemplate::MatchTemplate()
   */
 void MatchTemplate::run()
 {
+    mBenchmark->startTime();
+    mBenchmark->startTickCPU();
     if(mMetodo == MATCH_NORMAL) //NORMAL
     {
         this->normal();
+        mBenchmark->stopTime("Normal");
+        mBenchmark->stopTickCPU("Normal");
     }else if(mMetodo == MATCH_TBB) //TBB
     {
         this->tbb();
+        mBenchmark->stopTime("TBB");
+        mBenchmark->stopTickCPU("TBB");
     }
 }
 

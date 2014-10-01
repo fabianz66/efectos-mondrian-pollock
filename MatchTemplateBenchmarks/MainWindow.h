@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "VideoLoader.h"
 #include "MatchTemplate.h"
+#include "benchmark.h"
 
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -36,10 +37,13 @@ private slots:
 
     void on_detener_clicked();
 
+    void on_benchmark_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     /// Variables
+    Benchmark *mBenchmark;
     MatchTemplate* mMatchTempl;
     VideoLoader* mVideoLoader;
     int mMatchMethod;
