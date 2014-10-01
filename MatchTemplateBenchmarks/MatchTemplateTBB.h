@@ -45,7 +45,6 @@ public:
 
             /// Realiza el match template
             matchTemplate( in, mTemplate, out, MATCH_METHOD );
-            normalize( out, out, 0, 1, NORM_MINMAX, -1, cv::Mat() );
         }
     }
 };

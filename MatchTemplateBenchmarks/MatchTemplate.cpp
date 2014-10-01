@@ -113,13 +113,14 @@ void MatchTemplate::tbb()
     cv::parallel_for_(cv::Range(0, FRAMES_PER_IMAGE_TBB), MatchTemplateTBB(mOriginalImage, result, mTemplateImg, FRAMES_PER_IMAGE_TBB));
 
     /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
+    normalize( result, result, 0, 1, NORM_MINMAX, -1, cv::Mat() );
     double minVal; double maxVal; Point minLoc; Point maxLoc, matchLoc;
     minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
 
     if( MATCH_METHOD  == CV_TM_SQDIFF || MATCH_METHOD == CV_TM_SQDIFF_NORMED )
-        matchLoc = minLoc;
+    {    matchLoc = minLoc;}
     else
-        matchLoc = maxLoc;
+    {  matchLoc = maxLoc;}
 
     /// Show me what you got
     rectangle( result, matchLoc, Point( matchLoc.x + mTemplateImg.cols , matchLoc.y + mTemplateImg.rows ), Scalar::all(0), 2, 8, 0 );
