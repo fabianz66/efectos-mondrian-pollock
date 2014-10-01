@@ -49,8 +49,14 @@ void MatchTemplate::normal()
     int result_rows = mOriginalImage.rows - mTemplateImg.rows + 1;
     result.create( result_rows, result_cols, CV_32FC1 );
 
+    /// @LuisAlonso, el tiempo del match template empieza aqui
+
     /// Realiza el match template
     matchTemplate( mOriginalImage, mTemplateImg, result, MATCH_METHOD );
+
+
+    /// @LuisAlonso, y termina aqui
+
     normalize( result, result, 0, 1, NORM_MINMAX, -1, Mat() );
 
     /// Localizing the best match with minMaxLoc
@@ -109,8 +115,12 @@ void MatchTemplate::tbb()
     int result_rows = mOriginalImage.rows - mTemplateImg.rows*FRAMES_PER_IMAGE_TBB + FRAMES_PER_IMAGE_TBB;
     result.create( result_rows, result_cols, CV_32FC1 );
 
+     /// @LuisAlonso, el tiempo del match template empieza aqui
+
     /// create 8 threads and use TBB
     cv::parallel_for_(cv::Range(0, FRAMES_PER_IMAGE_TBB), MatchTemplateTBB(mOriginalImage, result, mTemplateImg, FRAMES_PER_IMAGE_TBB));
+
+    /// @LuisAlonso, y termina aqui
 
     /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
     normalize( result, result, 0, 1, NORM_MINMAX, -1, cv::Mat() );
