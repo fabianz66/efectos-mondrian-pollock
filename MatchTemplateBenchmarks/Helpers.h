@@ -13,6 +13,7 @@ public:
 
     static Point getMinPointFromList(QList<double>& pointValues, QList<Point>& points);
     static Point getMaxPointFromList(QList<double>& pointValues, QList<Point>& points);
+    static void showAlertMessage(QString pTitle, QString pMessage);
 };
 
 #endif // HELPERS_H

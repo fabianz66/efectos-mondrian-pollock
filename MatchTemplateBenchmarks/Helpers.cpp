@@ -1,4 +1,7 @@
 #include "Helpers.h"
+#include <QString>
+#include <QMessageBox>
+#include <QFont>
 
 Helpers::Helpers()
 {
@@ -33,4 +36,13 @@ Point Helpers::getMaxPointFromList(QList<double>& pointValues, QList<Point> &poi
         }
     }
     return points.at(maxValuePos);
+}
+
+void Helpers::showAlertMessage(QString pTitle, QString pMessage)
+{
+    QMessageBox ventana;
+    ventana.setText(pMessage);
+    ventana.setFont(QFont("Calibri",12));
+    ventana.setWindowTitle(pTitle);
+    ventana.exec();
 }

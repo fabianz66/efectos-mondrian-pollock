@@ -38,6 +38,7 @@ public:
     VideoLoader();
     bool startCaptureFromCamera();
     bool startCaptureFromVideo();
+    void stop();
 
 signals:
     void onNewImageCaptured(Mat);
@@ -46,7 +47,7 @@ private:
 
     /** Atributos */
     VideoCapture mVideoCap;
-    CvCapture* mCamCapture;
+    bool mRunning;
 
     /** Metodos */
     void run();

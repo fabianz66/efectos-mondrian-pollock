@@ -34,6 +34,8 @@ private slots:
     void on_cam_normal_clicked();
     void on_cam_tbb_clicked();
 
+    void on_detener_clicked();
+
 private:
     Ui::MainWindow *ui;
 

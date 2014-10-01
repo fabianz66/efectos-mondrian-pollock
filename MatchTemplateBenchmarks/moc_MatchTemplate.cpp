@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MatchTemplate.h'
 **
-** Created: Tue Sep 30 14:47:44 2014
+** Created: Tue Sep 30 17:21:06 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

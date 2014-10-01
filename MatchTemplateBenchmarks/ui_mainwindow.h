@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Sep 30 14:47:40 2014
+** Created: Tue Sep 30 16:09:42 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,6 +35,7 @@ public:
     QPushButton *video_tbb;
     QPushButton *cam_normal;
     QPushButton *cam_tbb;
+    QPushButton *detener;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -43,31 +44,34 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(410, 254);
+        MainWindow->resize(322, 250);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         label = new QLabel(centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(70, 30, 51, 31));
+        label->setGeometry(QRect(80, 20, 51, 31));
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(270, 30, 51, 31));
+        label_2->setGeometry(QRect(210, 20, 51, 31));
         video_normal = new QPushButton(centralWidget);
         video_normal->setObjectName(QString::fromUtf8("video_normal"));
-        video_normal->setGeometry(QRect(50, 80, 98, 27));
+        video_normal->setGeometry(QRect(50, 60, 98, 27));
         video_tbb = new QPushButton(centralWidget);
         video_tbb->setObjectName(QString::fromUtf8("video_tbb"));
-        video_tbb->setGeometry(QRect(50, 120, 98, 27));
+        video_tbb->setGeometry(QRect(50, 100, 98, 27));
         cam_normal = new QPushButton(centralWidget);
         cam_normal->setObjectName(QString::fromUtf8("cam_normal"));
-        cam_normal->setGeometry(QRect(250, 80, 98, 27));
+        cam_normal->setGeometry(QRect(190, 60, 98, 27));
         cam_tbb = new QPushButton(centralWidget);
         cam_tbb->setObjectName(QString::fromUtf8("cam_tbb"));
-        cam_tbb->setGeometry(QRect(250, 120, 98, 27));
+        cam_tbb->setGeometry(QRect(190, 100, 98, 27));
+        detener = new QPushButton(centralWidget);
+        detener->setObjectName(QString::fromUtf8("detener"));
+        detener->setGeometry(QRect(120, 140, 98, 27));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 410, 25));
+        menuBar->setGeometry(QRect(0, 0, 322, 25));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -90,6 +94,7 @@ public:
         video_tbb->setText(QApplication::translate("MainWindow", "TBB", 0, QApplication::UnicodeUTF8));
         cam_normal->setText(QApplication::translate("MainWindow", "Normal", 0, QApplication::UnicodeUTF8));
         cam_tbb->setText(QApplication::translate("MainWindow", "TBB", 0, QApplication::UnicodeUTF8));
+        detener->setText(QApplication::translate("MainWindow", "Detener", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

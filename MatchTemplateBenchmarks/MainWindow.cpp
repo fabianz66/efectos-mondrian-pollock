@@ -13,10 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mVideoLoader = new VideoLoader();
     mMatchTempl = new MatchTemplate();
 
-    //Crea las ventanas que va a mostrar
-    namedWindow("original", 1);
-    namedWindow("result", 1);
-
     //Registra el evento de nueva imagen recibida y de match template terminado
     qRegisterMetaType< cv::Mat >("Mat");
     connect(mVideoLoader, SIGNAL(onNewImageCaptured(Mat)), this, SLOT(imgCaptured(Mat)));
@@ -44,37 +40,61 @@ void MainWindow::imgCaptured(Mat image)
             mMatchTempl->tbb(image);
         }
     }
-    imshow("original", image);
+    imshow(NORMAL_IMG_NAME, image);
 }
 
 /** Recibe el evento de que a una imagen termino de hacerle el match template */
 void MainWindow::matchCompleted(Mat image)
 {
-    imshow("result", image);
+    imshow(RESULT_IMG_NAME, image);
 }
 
 /// =================================== EVENTOS DE BOTONES ===================================== ///
 
 void MainWindow::on_video_normal_clicked()
 {
-    mMatchMethod = MATCH_NORMAL;
-    mVideoLoader->startCaptureFromVideo();
+    //Crea las ventanas que va a mostrar
+    namedWindow(NORMAL_IMG_NAME, 1);
+    namedWindow(RESULT_IMG_NAME, 1);
+
+    if( mVideoLoader->startCaptureFromVideo())
+        mMatchMethod = MATCH_NORMAL;
+
 }
 
 void MainWindow::on_video_tbb_clicked()
 {
-    mMatchMethod = MATCH_TBB;
-    mVideoLoader->startCaptureFromVideo();
+    //Crea las ventanas que va a mostrar
+    namedWindow(NORMAL_IMG_NAME, 1);
+    namedWindow(RESULT_IMG_NAME, 1);
+
+
+    if(mVideoLoader->startCaptureFromVideo())
+         mMatchMethod = MATCH_TBB;
 }
 
 void MainWindow::on_cam_normal_clicked()
 {
-    mMatchMethod = MATCH_NORMAL;
-    mVideoLoader->startCaptureFromCamera();
+    //Crea las ventanas que va a mostrar
+    namedWindow(NORMAL_IMG_NAME, 1);
+    namedWindow(RESULT_IMG_NAME, 1);
+
+    if( mVideoLoader->startCaptureFromCamera())
+        mMatchMethod = MATCH_NORMAL;
+
 }
 
 void MainWindow::on_cam_tbb_clicked()
 {
-    mMatchMethod = MATCH_TBB;
-    mVideoLoader->startCaptureFromCamera();
+    //Crea las ventanas que va a mostrar
+    namedWindow(NORMAL_IMG_NAME, 1);
+    namedWindow(RESULT_IMG_NAME, 1);
+
+    if(mVideoLoader->startCaptureFromCamera())
+        mMatchMethod = MATCH_TBB;
+}
+
+void MainWindow::on_detener_clicked()
+{
+    mVideoLoader->stop();
 }
