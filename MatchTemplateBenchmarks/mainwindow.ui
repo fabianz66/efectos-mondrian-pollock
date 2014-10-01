@@ -95,7 +95,7 @@
    <widget class="QPushButton" name="detener">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>50</x>
       <y>140</y>
       <width>98</width>
       <height>27</height>
@@ -103,6 +103,19 @@
     </property>
     <property name="text">
      <string>Detener</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="benchmark_btn">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>140</y>
+      <width>98</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Benchmark</string>
     </property>
    </widget>
   </widget>

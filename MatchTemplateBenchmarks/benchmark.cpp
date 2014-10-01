@@ -6,8 +6,9 @@ Benchmark::Benchmark(QObject *parent) :
 {
     skip = 0;
     taked = 0;
+    path = "files";
 
-    QFile file_time("files/file_time.csv");
+    QFile file_time(path + "_file_time.csv");
     if (file_time.open(QFile::WriteOnly|QFile::Truncate))
     {
       QTextStream stream(&file_time);
@@ -16,7 +17,7 @@ Benchmark::Benchmark(QObject *parent) :
     }
 
 
-    QFile file_CPU("files/file_CPU.csv");
+    QFile file_CPU(path + "_file_CPU.csv");
     if (file_CPU.open(QFile::WriteOnly|QFile::Truncate))
     {
       QTextStream stream(&file_CPU);
@@ -24,7 +25,7 @@ Benchmark::Benchmark(QObject *parent) :
       file_CPU.close();
     }
 
-    QFile file_images("files/file_images.csv");
+    QFile file_images(path + "_file_images.csv");
     if (file_images.open(QFile::WriteOnly|QFile::Truncate))
     {
       QTextStream stream(&file_images);
@@ -51,7 +52,7 @@ void Benchmark::startTickCPU()
 
 void Benchmark::stopTime(QString pMethod)
 {
-    QFile file_time("files/file_time.csv");
+    QFile file_time(path + "_file_time.csv");
     if (file_time.open(QFile::WriteOnly|QFile::Append))
     {
       QTextStream stream(&file_time);
@@ -66,7 +67,7 @@ void Benchmark::stopTickCPU(QString pMethod)
 {
     duration = static_cast<double>(cv::getCPUTickCount()) - duration;
 
-    QFile file_CPU("files/file_CPU.csv");
+    QFile file_CPU(path + "_file_CPU.csv");
     if (file_CPU.open(QFile::WriteOnly|QFile::Append))
     {
       QTextStream stream(&file_CPU);
@@ -81,7 +82,7 @@ void Benchmark::setSkipImage(QString pMethod)
 {
     skip++;
 
-    QFile file_images("files/file_images.csv");
+    QFile file_images(path + "_file_images.csv");
     if (file_images.open(QFile::WriteOnly|QFile::Truncate))
     {
       QTextStream stream(&file_images);
@@ -95,7 +96,7 @@ void Benchmark::setGetImage(QString pMethod)
 {
     taked++;
 
-    QFile file_images("files/file_images.csv");
+    QFile file_images(path + "_file_images.csv");
     if (file_images.open(QFile::WriteOnly|QFile::Truncate))
     {
       QTextStream stream(&file_images);
@@ -103,4 +104,9 @@ void Benchmark::setGetImage(QString pMethod)
       stream << pMethod << "\t" << skip << "\t"<< taked << "\n";
       file_images.close();
     }
+}
+
+void Benchmark::setPath(QString pPath)
+{
+    this->path = pPath;
 }

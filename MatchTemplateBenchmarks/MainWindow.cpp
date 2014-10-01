@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "QDebug"
 #include "MatchTemplate.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,6 +29,7 @@ MainWindow::~MainWindow()
 /** Recibe el evento de una nueva imagen en la camara o video */
 void MainWindow::imgCaptured(Mat image)
 {
+
     if(mMatchTempl->isRunning()) {
 
         if(mMatchMethod == MATCH_NORMAL)
@@ -109,4 +111,13 @@ void MainWindow::on_cam_tbb_clicked()
 void MainWindow::on_detener_clicked()
 {
     mVideoLoader->stop();
+}
+
+void MainWindow::on_benchmark_btn_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                               "/home/",
+                               tr("CVS (*.cvs)"));
+
+    mBenchmark->setPath(fileName);
 }

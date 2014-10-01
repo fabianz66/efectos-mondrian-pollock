@@ -22,11 +22,13 @@ public:
     void stopTickCPU(QString pMethod);
     void setSkipImage(QString pMethod);
     void setGetImage(QString pMethod);
+    void setPath(QString pPath);
 
 private:
     explicit Benchmark(QObject *parent = 0);
 
     QElapsedTimer timer;
+    QString path;
     int skip;
     int taked;
     double duration;

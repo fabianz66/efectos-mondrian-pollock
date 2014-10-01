@@ -37,6 +37,8 @@ private slots:
 
     void on_detener_clicked();
 
+    void on_benchmark_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
