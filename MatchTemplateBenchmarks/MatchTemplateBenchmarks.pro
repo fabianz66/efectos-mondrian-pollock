@@ -16,7 +16,8 @@ SOURCES += main.cpp\
         MainWindow.cpp \
     VideoLoader.cpp \
     MatchTemplate.cpp \
-    Helpers.cpp
+    Helpers.cpp \
+    benchmark.cpp
 
 
 HEADERS  += MainWindow.h \
@@ -24,7 +25,8 @@ HEADERS  += MainWindow.h \
     MatchTemplate.h \
     MatchTemplateTBB.h \
     Constantes.h \
-    Helpers.h
+    Helpers.h \
+    benchmark.h
 
 FORMS    += mainwindow.ui
 

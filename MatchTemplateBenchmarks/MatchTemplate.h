@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <QThread>
 #include "MatchTemplateTBB.h"
+#include "benchmark.h"
 
 using namespace cv;
 
@@ -23,6 +24,7 @@ class MatchTemplate : public QThread
     Q_OBJECT
 private:
     /// Atributos
+    Benchmark *mBenchmark;
     Mat mOriginalImage;
     Mat mTemplateImg;
     int mMetodo;

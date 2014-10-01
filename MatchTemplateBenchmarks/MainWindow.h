@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "VideoLoader.h"
 #include "MatchTemplate.h"
+#include "benchmark.h"
 
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -40,6 +41,7 @@ private:
     Ui::MainWindow *ui;
 
     /// Variables
+    Benchmark *mBenchmark;
     MatchTemplate* mMatchTempl;
     VideoLoader* mVideoLoader;
     int mMatchMethod;
