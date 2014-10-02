@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>322</width>
-    <height>250</height>
+    <width>473</width>
+    <height>254</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -108,14 +108,40 @@
    <widget class="QPushButton" name="benchmark_btn">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>140</y>
+      <x>330</x>
+      <y>60</y>
       <width>98</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Benchmark</string>
+     <string>Path</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>30</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Benchmarks</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="save_benchmarks">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>100</y>
+      <width>98</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save</string>
     </property>
    </widget>
   </widget>
@@ -124,7 +150,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>322</width>
+     <width>473</width>
      <height>25</height>
     </rect>
    </property>

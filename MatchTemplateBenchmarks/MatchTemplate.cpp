@@ -14,18 +14,12 @@ MatchTemplate::MatchTemplate()
   */
 void MatchTemplate::run()
 {
-    mBenchmark->startTime();
-    mBenchmark->startTickCPU();
     if(mMetodo == MATCH_NORMAL) //NORMAL
     {
         this->normal();
-        mBenchmark->stopTime("Normal");
-        mBenchmark->stopTickCPU("Normal");
     }else if(mMetodo == MATCH_TBB) //TBB
     {
         this->tbb();
-        mBenchmark->stopTime("TBB");
-        mBenchmark->stopTickCPU("TBB");
     }
 }
 
@@ -58,9 +52,14 @@ void MatchTemplate::normal()
 
     /// @LuisAlonso, el tiempo del match template empieza aqui
 
+    mBenchmark->startTimer();
+    mBenchmark->startTickCPU();
+
     /// Realiza el match template
     matchTemplate( mOriginalImage, mTemplateImg, result, MATCH_METHOD );
 
+    mBenchmark->markLapTimer();
+    mBenchmark->markLapTickCPU();
 
     /// @LuisAlonso, y termina aqui
 
@@ -124,8 +123,14 @@ void MatchTemplate::tbb()
 
      /// @LuisAlonso, el tiempo del match template empieza aqui
 
+    mBenchmark->startTimer();
+    mBenchmark->startTickCPU();
+
     /// create 8 threads and use TBB
     cv::parallel_for_(cv::Range(0, FRAMES_PER_IMAGE_TBB), MatchTemplateTBB(mOriginalImage, result, mTemplateImg, FRAMES_PER_IMAGE_TBB));
+
+    mBenchmark->markLapTimer();
+    mBenchmark->markLapTickCPU();
 
     /// @LuisAlonso, y termina aqui
 

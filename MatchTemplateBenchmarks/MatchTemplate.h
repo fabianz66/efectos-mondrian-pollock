@@ -4,7 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <QThread>
 #include "MatchTemplateTBB.h"
-#include "benchmark.h"
+#include "Benchmark.h"
 
 using namespace cv;
 

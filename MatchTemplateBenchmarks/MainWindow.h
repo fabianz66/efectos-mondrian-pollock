@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "VideoLoader.h"
 #include "MatchTemplate.h"
-#include "benchmark.h"
+#include "Benchmark.h"
 
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -34,10 +34,9 @@ private slots:
     void on_video_tbb_clicked();
     void on_cam_normal_clicked();
     void on_cam_tbb_clicked();
-
     void on_detener_clicked();
-
     void on_benchmark_btn_clicked();
+    void on_save_benchmarks_clicked();
 
 private:
     Ui::MainWindow *ui;

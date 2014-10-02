@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Sep 30 23:38:39 2014
+** Created: Wed Oct 1 21:08:26 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -37,6 +37,8 @@ public:
     QPushButton *cam_tbb;
     QPushButton *detener;
     QPushButton *benchmark_btn;
+    QLabel *label_3;
+    QPushButton *save_benchmarks;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -45,7 +47,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(322, 250);
+        MainWindow->resize(473, 254);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         label = new QLabel(centralWidget);
@@ -71,11 +73,17 @@ public:
         detener->setGeometry(QRect(50, 140, 98, 27));
         benchmark_btn = new QPushButton(centralWidget);
         benchmark_btn->setObjectName(QString::fromUtf8("benchmark_btn"));
-        benchmark_btn->setGeometry(QRect(190, 140, 98, 27));
+        benchmark_btn->setGeometry(QRect(330, 60, 98, 27));
+        label_3 = new QLabel(centralWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(340, 30, 91, 17));
+        save_benchmarks = new QPushButton(centralWidget);
+        save_benchmarks->setObjectName(QString::fromUtf8("save_benchmarks"));
+        save_benchmarks->setGeometry(QRect(330, 100, 98, 27));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 322, 25));
+        menuBar->setGeometry(QRect(0, 0, 473, 25));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -99,7 +107,9 @@ public:
         cam_normal->setText(QApplication::translate("MainWindow", "Normal", 0, QApplication::UnicodeUTF8));
         cam_tbb->setText(QApplication::translate("MainWindow", "TBB", 0, QApplication::UnicodeUTF8));
         detener->setText(QApplication::translate("MainWindow", "Detener", 0, QApplication::UnicodeUTF8));
-        benchmark_btn->setText(QApplication::translate("MainWindow", "Benchmark", 0, QApplication::UnicodeUTF8));
+        benchmark_btn->setText(QApplication::translate("MainWindow", "Path", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("MainWindow", "Benchmarks", 0, QApplication::UnicodeUTF8));
+        save_benchmarks->setText(QApplication::translate("MainWindow", "Save", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

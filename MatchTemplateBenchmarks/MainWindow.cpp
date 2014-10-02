@@ -30,29 +30,18 @@ MainWindow::~MainWindow()
 void MainWindow::imgCaptured(Mat image)
 {
 
-    if(mMatchTempl->isRunning()) {
+    if(mMatchTempl->isRunning()) { /// Brinque esta imagen
+        mBenchmark->addSkippedImage();
+
+    }else { /// Aplique matching
+
+        mBenchmark->addProccesedImage();
 
         if(mMatchMethod == MATCH_NORMAL)
-        {
-            mBenchmark->setSkipImage("Normal");
-        }else if(mMatchMethod == MATCH_TBB)
-        {
-            mBenchmark->setSkipImage("TBB");
-        }
-
-        //qDebug() << "isRunning - Brinque esta imagen";
-    }else {
-        //qDebug() << "NOT Running - Aplique matching";
-
-        if(mMatchMethod == MATCH_NORMAL)
-        {
-            mBenchmark->setGetImage("Normal");
             mMatchTempl->normal(image);
-        }else if(mMatchMethod == MATCH_TBB)
-        {
-            mBenchmark->setGetImage("TBB");
+
+        else if(mMatchMethod == MATCH_TBB)
             mMatchTempl->tbb(image);
-        }
     }
     imshow(NORMAL_IMG_NAME, image);
 }
@@ -84,7 +73,7 @@ void MainWindow::on_video_tbb_clicked()
 
 
     if(mVideoLoader->startCaptureFromVideo())
-         mMatchMethod = MATCH_TBB;
+        mMatchMethod = MATCH_TBB;
 }
 
 void MainWindow::on_cam_normal_clicked()
@@ -116,8 +105,13 @@ void MainWindow::on_detener_clicked()
 void MainWindow::on_benchmark_btn_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                               "/home/",
-                               tr("CVS (*.cvs)"));
+                                                    "/home/",
+                                                    tr("CVS (*.cvs)"));
 
     mBenchmark->setPath(fileName);
+}
+
+void MainWindow::on_save_benchmarks_clicked()
+{
+    mBenchmark->saveAndRestart();
 }

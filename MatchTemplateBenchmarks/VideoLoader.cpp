@@ -42,7 +42,7 @@ bool VideoLoader::startCaptureFromVideo()
     }
 
     /** Intenta cargar el video */
-    mVideoCap.open("resources/video3.mp4");
+    mVideoCap.open("resources/video_pos_default.mp4");
     if(!mVideoCap.isOpened())
     {
         Helpers h;
@@ -58,13 +58,10 @@ bool VideoLoader::startCaptureFromVideo()
 
 void VideoLoader::stop()
 {
-    if(mRunning)
-    {
-        mRunning = false;
+    mRunning = false;
 
-        if(mVideoCap.isOpened()) {
-            mVideoCap.release();
-        }
+    if(mVideoCap.isOpened()) {
+        mVideoCap.release();
     }
 }
 
@@ -96,12 +93,19 @@ void VideoLoader::notifyWithFrame()
     if(mVideoCap.grab())
     {
         mVideoCap >> frame;
+        if(frame.cols != 0 && frame.rows != 0)
+        {
 
-        //Notifica a quien este conectado
-        emit onNewImageCaptured(frame);
-    }else
-    {
-        mRunning = false;
+            //Notifica a quien este conectado
+            emit onNewImageCaptured(frame);
+            return;
+        }
+    }
+
+    qDebug() << "FIN DE VIDEO";
+    mRunning = false;
+    if(mVideoCap.isOpened()) {
         mVideoCap.release();
     }
+
 }
