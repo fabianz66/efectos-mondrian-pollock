@@ -96,6 +96,8 @@ void VideoLoader::notifyWithFrame()
         if(frame.cols != 0 && frame.rows != 0)
         {
 
+            qDebug() << "ROWS" << frame.rows;
+            qDebug() << "COLS" << frame.cols;
             //Notifica a quien este conectado
             emit onNewImageCaptured(frame);
             return;
