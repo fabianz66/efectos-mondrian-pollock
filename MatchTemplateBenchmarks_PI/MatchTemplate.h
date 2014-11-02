@@ -30,15 +30,11 @@ private:
 
     /// Metodos
     void normal();
-    void tbb();
-    void gpu();
     void run();
 
 public:
     MatchTemplate();
     void normal( Mat original );
-    void tbb( Mat original );
-    void gpu( Mat original );
 
 signals:
     void onMatchTemplateFinished(Mat);

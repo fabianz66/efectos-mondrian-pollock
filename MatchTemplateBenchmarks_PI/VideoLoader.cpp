@@ -4,6 +4,7 @@
 #include "QDebug"
 #include "Constantes.h"
 #include "Helpers.h"
+#include "Paths.h"
 
 VideoLoader::VideoLoader()
 {
@@ -18,7 +19,8 @@ bool VideoLoader::startCaptureFromVideo()
     }
 
     /** Intenta cargar el video */
-    mVideoCap.open("resources/video_pos_default.mp4");
+    qDebug() <<" PATH: " << Paths::getInstance().getVideoPath();
+    mVideoCap.open(Paths::getInstance().getVideoPath());
     if(!mVideoCap.isOpened())
     {
         Helpers h;
