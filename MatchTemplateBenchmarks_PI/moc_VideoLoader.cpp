@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'VideoLoader.h'
 **
-** Created: Sun Nov 2 05:44:38 2014
-**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
+** Created: Wed Nov 19 05:14:11 2014
+**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'VideoLoader.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.1. It"
+#error "This file was generated using the moc from 4.8.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -31,17 +31,17 @@ static const uint qt_meta_data_VideoLoader[] = {
        1,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
-      13,   12,   12,   12, 0x05,
+      12,   36,   36,   36, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      37,   12,   12,   12, 0x08,
+      37,   36,   36,   36, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_VideoLoader[] = {
-    "VideoLoader\0\0onNewImageCaptured(Mat)\0"
-    "notifyWithFrame()\0"
+    "VideoLoader\0onNewImageCaptured(Mat)\0"
+    "\0notifyWithFrame()\0"
 };
 
 void VideoLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)

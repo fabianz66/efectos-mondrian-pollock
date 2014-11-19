@@ -9,9 +9,6 @@ QT       += core gui
 TARGET = MatchTemplateBenchmarks
 TEMPLATE = app
 
-# OpenCV
-CVCFG = $$system(/bin/echo "pkg-config opencv")
-
 SOURCES += main.cpp\
         MainWindow.cpp \
     VideoLoader.cpp \
@@ -31,8 +28,13 @@ HEADERS  += MainWindow.h \
 
 FORMS    += mainwindow.ui
 
-CVLIB = $$system($$CVCFG --libs)
-
-LIBS += $$CVLIB
-
+INCLUDEPATH += /usr/local/include/opencv-2.4.9
+LIBS += -L/usr/local/lib/
+LIBS += -lopencv_core
+LIBS += -lopencv_highgui
+LIBS += -lopencv_imgproc
+LIBS += -lopencv_features2d
+LIBS += -lopencv_ml
+LIBS += -lopencv_video
+LIBS += -lopencv_objdetect
 
